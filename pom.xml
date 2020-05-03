@@ -69,11 +69,6 @@
             <artifactId>reactor-test</artifactId>
             <scope>test</scope>
         </dependency>
-<<<<<<< HEAD
-=======
-
-
->>>>>>> dbeed8fb9adc7adadc42aef706c68dffd03163d5
     </dependencies>
 
     <build>
@@ -90,9 +85,7 @@
                     <skipTests>true</skipTests>
                 </configuration>
             </plugin>
-
         </plugins>
-
     </build>
 
     <repositories>

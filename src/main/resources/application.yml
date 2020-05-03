@@ -4,15 +4,9 @@ spring:
   #数据库连接配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-<<<<<<< HEAD
     url: jdbc:localhost:3306/watermelon?characterEncoding=utf-8&useSSL=false
     username: root
     password: zhang123
-=======
-    url: jdbc:mysql://localhost:3306/watermelon?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai&useSSL=false
-    username: root
-    password: root
->>>>>>> dbeed8fb9adc7adadc42aef706c68dffd03163d5
 
 #mybatis的相关配置
 mybatis:
@@ -21,10 +15,6 @@ mybatis:
   type-aliases-package: cn.watermelon.watermelonbackend.entity
   #开启驼峰命名
   configuration:
-<<<<<<< HEAD
     map-underscore-to-camel-case: true
-=======
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-    map-underscore-to-camel-case: true
 
->>>>>>> dbeed8fb9adc7adadc42aef706c68dffd03163d5

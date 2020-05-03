@@ -23,13 +23,11 @@ public class ProblemServiceImpl implements ProblemService
     {
         return problemMapper.findProblemByName(name);
     }
-<<<<<<< HEAD
     public List<Problem> getFindProblemByName(int id)
     {
         return problemMapper.findProblemById(id);
     }
 
-=======
     public List<Problem> findProblemById(int id)
     {
         return problemMapper.findProblemById(id);
@@ -38,5 +36,4 @@ public class ProblemServiceImpl implements ProblemService
     {
         return problemMapper.addProblem(problem);
     }
->>>>>>> dbeed8fb9adc7adadc42aef706c68dffd03163d5
 }
