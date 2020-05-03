@@ -40,4 +40,9 @@ public class CommentController {
         return ConvertUtil.prs2Subs(commentService.getCommentByProblemId(problemId));
     }
 
+    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    List<CommentResponseDTO> getCommentsByUserId(int userId) {
+        return ConvertUtil.prs2Subs(commentService.getCommentByUserId(userId));
+    }
+
 }

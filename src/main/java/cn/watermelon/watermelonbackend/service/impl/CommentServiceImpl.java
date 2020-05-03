@@ -38,4 +38,9 @@ public class CommentServiceImpl implements CommentService {
         return commentMapper.getCommentListByProblemId(problemId);
     }
 
+    @Override
+    public List<Comment> getCommentByUserId(int userId) {
+        return commentMapper.getCommentListByUserId(userId);
+    }
+
 }
