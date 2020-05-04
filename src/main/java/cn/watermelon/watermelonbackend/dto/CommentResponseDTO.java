@@ -13,7 +13,7 @@ public class CommentResponseDTO {
 
     int userId;
 
-    int problemId;
+    String username;
 
     String title;
 
@@ -27,7 +27,7 @@ public class CommentResponseDTO {
     public CommentResponseDTO(Comment comment) {
         this.commentId = comment.getCommentId();
         this.userId = comment.getUserId();
-        this.problemId = comment.getProblemId();
+        this.username = comment.getUsername();
         this.title = comment.getTitle();
         this.content = comment.getContent();
         this.followId = comment.getCommentId();

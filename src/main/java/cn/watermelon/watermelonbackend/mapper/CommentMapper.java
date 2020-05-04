@@ -9,9 +9,9 @@ import java.util.List;
 public interface CommentMapper {
 
     @Insert({"INSERT into `comments`",
-            "(`user_id`, `problem_id`, `title`, `content`, `follow_id`, `create_time`, `is_delete`)",
+            "(`user_id`, `username`, `title`, `content`, `follow_id`, `create_time`, `is_delete`)",
             "VALUES",
-            "(#{userId}, #{problemId}, #{title}, #{content}, #{followId}, #{createTime}, false)"
+            "(#{userId}, #{username}, #{title}, #{content}, #{followId}, #{createTime}, false)"
     })
     void insertComment(Comment comment);
 
@@ -36,7 +36,7 @@ public interface CommentMapper {
     void deleteCommentByFollowId(int followId);
 
     @Select({"SELECT * FROM `comments`",
-            "WHERE `is_delete` = false AND `problem_id` = #{problemId}",
+            "WHERE `is_delete` = false",
             "ORDER BY `create_time` DESC",
     })
     @Results(value = {
@@ -44,7 +44,7 @@ public interface CommentMapper {
             @Result(property = "title", column = "title"),
             @Result(property = "content", column = "content"),
     })
-    List<Comment> getCommentListByProblemId(int problemId);
+    List<Comment> getCommentList();
 
     @Select({"SELECT * FROM `comments`",
             "WHERE `is_delete` = false AND `user_id` = #{userId}",

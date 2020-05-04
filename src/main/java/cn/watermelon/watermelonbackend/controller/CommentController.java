@@ -19,9 +19,9 @@ public class CommentController {
     private CommentService commentService;
 
     @RequestMapping(value = "", method = RequestMethod.POST)
-    void createComment(Integer problemId, Integer userId, String title, String content, Integer followId) {
+    void createComment(Integer userId, String username, String title, String content, Integer followId) {
         Comment comment = new Comment();
-        comment.setProblemId(problemId);
+        comment.setUsername(username);
         comment.setUserId(userId);
         comment.setTitle(title);
         comment.setContent(content);
@@ -35,13 +35,11 @@ public class CommentController {
         commentService.deleteComment(commentId);
     }
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
-    List<CommentResponseDTO> getCommentsByProblemId(Integer problemId) {
-        return ConvertUtil.prs2Subs(commentService.getCommentByProblemId(problemId));
-    }
-
     @RequestMapping(value = "/user", method = RequestMethod.GET)
-    List<CommentResponseDTO> getCommentsByUserId(int userId) {
+    List<CommentResponseDTO> getCommentsByUserId(Integer userId) {
+        if (userId == null) {
+            return ConvertUtil.prs2Subs(commentService.getComments());
+        }
         return ConvertUtil.prs2Subs(commentService.getCommentByUserId(userId));
     }
 

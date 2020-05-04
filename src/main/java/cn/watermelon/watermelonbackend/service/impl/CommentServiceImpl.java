@@ -34,8 +34,8 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<Comment> getCommentByProblemId(int problemId) {
-        return commentMapper.getCommentListByProblemId(problemId);
+    public List<Comment> getComments() {
+        return commentMapper.getCommentList();
     }
 
     @Override

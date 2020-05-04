@@ -12,8 +12,6 @@ public class Comment {
 
     int userId;
 
-    int problemId;
-
     String title;
 
     String content;
@@ -22,5 +20,7 @@ public class Comment {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
     Date createTime;
+
+    String username;
 
 }
