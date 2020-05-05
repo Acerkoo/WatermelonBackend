@@ -16,7 +16,7 @@ public class ProblemServiceImpl implements ProblemService
     @Override
     public List<Problem> findAll()
     {
-        return problemMapper.findAll();
+        return problemMapper.getAllProblems();
     }
     @Override
     public List<Problem> findProblemByName(String name)

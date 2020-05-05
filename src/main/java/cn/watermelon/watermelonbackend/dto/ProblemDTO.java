@@ -1,24 +1,39 @@
 package cn.watermelon.watermelonbackend.dto;
 
 import cn.watermelon.watermelonbackend.entity.Problem;
+import cn.watermelon.watermelonbackend.enumeration.ProblemStatus;
 import lombok.Data;
 
 @Data
 public class ProblemDTO {
 
     int problemId;
+
     String title;
+
     String description;
+
     String input;
+
     String output;
+
     String hint;
+
     boolean isSpj;
+
     int contestId;
+
     boolean visible;
+
     String tmLimit;
+
     String sampleInput;
+
     String sampleOutput;
+
     String memLimit;
+
+    ProblemStatus status;
 
     public ProblemDTO(Problem problem) {
         this.problemId = problem.getKeyId();

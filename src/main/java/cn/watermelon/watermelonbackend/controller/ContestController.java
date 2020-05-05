@@ -3,7 +3,9 @@ package cn.watermelon.watermelonbackend.controller;
 import cn.watermelon.watermelonbackend.dto.ProblemDTO;
 import cn.watermelon.watermelonbackend.entity.Contest;
 import cn.watermelon.watermelonbackend.service.ContestService;
+import cn.watermelon.watermelonbackend.service.RecordService;
 import cn.watermelon.watermelonbackend.utils.ConvertUtil;
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,7 +18,10 @@ import java.util.List;
 public class ContestController {
 
     @Autowired
-    ContestService contestService;
+    private ContestService contestService;
+
+    @Autowired
+    private RecordService recordService;
 
     @RequestMapping(value = "/contest/all", method = RequestMethod.GET)
     public List<Contest> getAllContest() {
@@ -24,8 +29,8 @@ public class ContestController {
     }
 
     @RequestMapping(value = "/contest/problem", method = RequestMethod.GET)
-    public List<ProblemDTO> getProblem(int contestId) {
-        return ConvertUtil.problemDTOList(contestService.findContestProblem(contestId));
+    public List<ProblemDTO> getProblem(int contestId, int userId) {
+        return ConvertUtil.problemDTOList(contestService.findContestProblem(contestId), userId, recordService, contestId);
     }
 
     @RequestMapping(value = "/contest/id", method = RequestMethod.GET)
