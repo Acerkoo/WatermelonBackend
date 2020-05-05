@@ -1,6 +1,6 @@
 package cn.watermelon.watermelonbackend.enumeration;
 
-public enum  ProblemStatus {
+public enum ProblemStatus {
 
     Wating(0),
 

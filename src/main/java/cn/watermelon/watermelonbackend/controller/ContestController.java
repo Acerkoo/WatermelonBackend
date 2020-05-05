@@ -5,7 +5,6 @@ import cn.watermelon.watermelonbackend.entity.Contest;
 import cn.watermelon.watermelonbackend.service.ContestService;
 import cn.watermelon.watermelonbackend.service.RecordService;
 import cn.watermelon.watermelonbackend.utils.ConvertUtil;
-import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

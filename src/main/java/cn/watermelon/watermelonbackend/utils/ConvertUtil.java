@@ -24,6 +24,7 @@ public class ConvertUtil {
 
     public static List<ProblemDTO> problemDTOList(List<Problem> list, int userId, RecordService recordService, Integer contestId) {
         List<ProblemDTO> result = new ArrayList<>();
+        int rankId = 0;
         if (list != null) {
             for (Problem problem : list) {
                 ProblemDTO problemDTO = new ProblemDTO(problem);
@@ -42,7 +43,9 @@ public class ConvertUtil {
                         status = 2;
                     }
                 }
+                rankId += 1;
                 problemDTO.setStatus(ProblemStatus.getProblemStatus(status));
+                problemDTO.setRankId(rankId);
                 result.add(problemDTO);
             }
         }

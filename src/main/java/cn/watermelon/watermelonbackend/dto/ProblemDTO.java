@@ -35,6 +35,8 @@ public class ProblemDTO {
 
     ProblemStatus status;
 
+    int rankId;
+
     public ProblemDTO(Problem problem) {
         this.problemId = problem.getKeyId();
         this.title = problem.getTitle();

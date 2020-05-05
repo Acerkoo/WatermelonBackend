@@ -1,7 +1,6 @@
 package cn.watermelon.watermelonbackend.entity;
 
 import lombok.Data;
-import org.w3c.dom.Text;
 
 import java.io.Serializable;
 
