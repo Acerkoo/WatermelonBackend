@@ -3,8 +3,11 @@ package cn.watermelon.watermelonbackend.entity;
 import java.io.File;
 
 public class FileProblem {
+
     private File file;
+
     private String url;
+
     private int problemId;
 
     public File getFile() {

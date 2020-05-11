@@ -1,10 +1,7 @@
 package cn.watermelon.watermelonbackend.mapper;
 
 import cn.watermelon.watermelonbackend.entity.Problem;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -40,4 +37,5 @@ public interface ProblemMapper {
             @Result(property = "contestId", column = "contest_id"),
     })
     List<Problem> getAllProblems();
+
 }

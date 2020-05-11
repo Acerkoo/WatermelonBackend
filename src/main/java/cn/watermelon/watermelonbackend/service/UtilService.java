@@ -1,6 +1,8 @@
 package cn.watermelon.watermelonbackend.service;
 
-public interface RecordService {
+import java.util.List;
+
+public interface UtilService {
 
     int getAcRecordByProblem(int userId, int problemId);
 
@@ -10,4 +12,5 @@ public interface RecordService {
 
     int getRecordByContest(int userId, int problemId, int contestId);
 
+    List<String> getProblemTag(int problemId);
 }

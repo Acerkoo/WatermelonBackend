@@ -6,18 +6,31 @@ import java.io.Serializable;
 
 @Data
 public class Problem implements Serializable {
+
     private int keyId;
+
     private String title;
+
     private String description;
+
     private String input;
+
     private String output;
+
     private String hint;
+
     private boolean isSpj;
+
     private int contestId;
+
     private boolean visible;
+
     private String tmLimit;
+
     private String sampleInput;
+
     private String sampleOutput;
+
     private String memLimit;
 
 //    public String getMemLimit() {

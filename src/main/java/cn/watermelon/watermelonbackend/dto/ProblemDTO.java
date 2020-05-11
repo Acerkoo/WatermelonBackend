@@ -4,6 +4,8 @@ import cn.watermelon.watermelonbackend.entity.Problem;
 import cn.watermelon.watermelonbackend.enumeration.ProblemStatus;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class ProblemDTO {
 
@@ -36,6 +38,8 @@ public class ProblemDTO {
     ProblemStatus status;
 
     int rankId;
+
+    List<String> problemTags;
 
     public ProblemDTO(Problem problem) {
         this.problemId = problem.getKeyId();

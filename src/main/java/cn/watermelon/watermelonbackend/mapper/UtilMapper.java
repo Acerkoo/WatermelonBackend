@@ -2,9 +2,12 @@ package cn.watermelon.watermelonbackend.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Mapper
-public interface RecordMapper {
+public interface UtilMapper {
 
     @Select({"SELECT COUNT(*)",
             "FROM `submissions`",
@@ -29,4 +32,11 @@ public interface RecordMapper {
             "WHERE `is_delete` = false AND `user_id` = #{userId} AND `problem_id` = #{problemId} AND `contest_id` = #{contestId}",
     })
     int getRecordByContest(int userId, int problemId, int contestId);
+
+    @Select({"SELECT `tag`",
+            "FROM `problem_with_tag`",
+            "WHERE `problem_id` = #{problemId}",
+            "LIMIT 0, 5",
+    })
+    List<String> getProblemTag(int problemId);
 }

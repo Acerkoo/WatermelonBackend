@@ -5,7 +5,7 @@ import cn.watermelon.watermelonbackend.dto.ProblemDTO;
 import cn.watermelon.watermelonbackend.entity.Comment;
 import cn.watermelon.watermelonbackend.entity.Problem;
 import cn.watermelon.watermelonbackend.enumeration.ProblemStatus;
-import cn.watermelon.watermelonbackend.service.RecordService;
+import cn.watermelon.watermelonbackend.service.UtilService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ public class ConvertUtil {
         return result;
     }
 
-    public static List<ProblemDTO> problemDTOList(List<Problem> list, int userId, RecordService recordService, Integer contestId) {
+    public static List<ProblemDTO> problemDTOList(List<Problem> list, int userId, UtilService utilService, Integer contestId) {
         List<ProblemDTO> result = new ArrayList<>();
         int rankId = 0;
         if (list != null) {
@@ -31,21 +31,23 @@ public class ConvertUtil {
                 int status = 0;
                 int problemId = problem.getKeyId();
                 if (contestId == null) {
-                    if (recordService.getAcRecordByProblem(userId, problemId) > 0) {
+                    if (utilService.getAcRecordByProblem(userId, problemId) > 0) {
                         status = 1;
-                    } else if (recordService.getRecordByProblem(userId, problemId) > 0) {
+                    } else if (utilService.getRecordByProblem(userId, problemId) > 0) {
                         status = 2;
                     }
                 } else {
-                    if (recordService.getAcRecordByContest(userId, problemId, contestId) > 0) {
+                    if (utilService.getAcRecordByContest(userId, problemId, contestId) > 0) {
                         status = 1;
-                    } else if (recordService.getRecordByContest(userId, problemId, contestId) > 0) {
+                    } else if (utilService.getRecordByContest(userId, problemId, contestId) > 0) {
                         status = 2;
                     }
                 }
                 rankId += 1;
                 problemDTO.setStatus(ProblemStatus.getProblemStatus(status));
                 problemDTO.setRankId(rankId);
+                List<String> tags = utilService.getProblemTag(problemId);
+                problemDTO.setProblemTags(tags);
                 result.add(problemDTO);
             }
         }
