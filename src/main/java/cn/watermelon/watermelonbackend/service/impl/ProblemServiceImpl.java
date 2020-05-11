@@ -45,14 +45,8 @@ public class ProblemServiceImpl implements ProblemService {
         }
     }
 
-    @Override
-    public List<String> getProblemTag(int problemId) {
-        return tagMapper.getProblemTag(problemId);
-    }
-
     public int addProblem(Problem problem) {
         return problemMapper.addProblem(problem);
     }
-
 
 }

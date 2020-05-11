@@ -70,4 +70,14 @@ public class ContestController {
         contestService.deleteProblemFromContest(problemId, contestId);
     }
 
+    @RequestMapping(value = "contest/tag", method = RequestMethod.POST)
+    public void addContestTag(int contestId, String tag) {
+
+    }
+
+    @RequestMapping(value = "/contest/tag", method = RequestMethod.GET)
+    public List<String> getContestTag(int contestId) {
+
+    }
+
 }

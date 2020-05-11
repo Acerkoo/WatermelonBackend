@@ -38,4 +38,9 @@ public class UtilServiceImpl implements UtilService {
         return utilMapper.getProblemTag(problemId);
     }
 
+    @Override
+    public List<String> getContestTag(int contestId) {
+        return utilMapper.getContestTag(contestId);
+    }
+
 }

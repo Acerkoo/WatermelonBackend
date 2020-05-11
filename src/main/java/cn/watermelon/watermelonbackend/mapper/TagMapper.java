@@ -37,5 +37,29 @@ public interface TagMapper {
     })
     List<String> getProblemTag(int problemId);
 
+    @Insert({"INSERT INTO `contest_with_tag`",
+            "(`contest_id`, `tag`, 1)",
+            "VALUES",
+            "{#{contestId}, #{tag})",
+    })
+    void insertContestTag(int contestId, String tag);
+
+    @Update({"UPDATE `contest_with_tag`",
+            "SET `num` = `num` + 1",
+            "WHERE `contest_id` = #{contestId} AND `tag` = #{tag}",
+    })
+    void addContestTag(int contestId, String tag);
+
+    @Select({"SELECT COUNT(*)",
+            "FROM `contest_with_tag`",
+            "WHERE `contest_id` = #{contestId} AND `tag` = #{tag}",
+    })
+    int checkContestTag(int contestId, String tag);
+
+    @Select({"SELECT `tag`",
+            "FROM `contest_with_tag`",
+            "WHERE `contest_id` = #{contestId}",
+    })
+    List<String> getContestTag(int contestId);
 
 }

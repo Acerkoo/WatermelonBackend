@@ -4,8 +4,8 @@ import cn.watermelon.watermelonbackend.entity.Contest;
 import cn.watermelon.watermelonbackend.entity.Problem;
 import cn.watermelon.watermelonbackend.mapper.ContestMapper;
 import cn.watermelon.watermelonbackend.mapper.ContestWithProblemMapper;
+import cn.watermelon.watermelonbackend.mapper.TagMapper;
 import cn.watermelon.watermelonbackend.service.ContestService;
-import cn.watermelon.watermelonbackend.service.ProblemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,10 @@ import java.util.List;
 public class ContestServiceImpl implements ContestService {
 
     @Autowired
-    ContestMapper contestMapper;
+    private ContestMapper contestMapper;
+
+    @Autowired
+    private TagMapper tagMapper;
 
     @Autowired
     private ContestWithProblemMapper contestWithProblemMapper;
@@ -73,5 +76,12 @@ public class ContestServiceImpl implements ContestService {
         contestWithProblemMapper.deleteProblemFromContest(problemId, contestId);
     }
 
+    public void addContestTag(int contestId, String tag) {
+        if (tagMapper.checkContestTag(contestId, tag) != 0) {
+            tagMapper.addContestTag(contestId, tag);
+        } else {
+            tagMapper.insertContestTag(contestId, tag);
+        }
+    }
 
 }

@@ -2,7 +2,6 @@ package cn.watermelon.watermelonbackend.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -39,4 +38,11 @@ public interface UtilMapper {
             "LIMIT 0, 5",
     })
     List<String> getProblemTag(int problemId);
+
+    @Select({"SELECT `tag`",
+            "FROM `contest_with_tag`",
+            "WHERE `contest_id` = #{problemId}",
+            "LIMIT 0, 5",
+    })
+    List<String> getContestTag(int contestId);
 }

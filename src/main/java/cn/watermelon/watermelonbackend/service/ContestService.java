@@ -6,8 +6,8 @@ import cn.watermelon.watermelonbackend.entity.Problem;
 import java.util.Date;
 import java.util.List;
 
-public interface ContestService
-{
+public interface ContestService {
+
     List<Contest> getAllContest();
 
     List<Problem> findContestProblem(int contestId);
@@ -23,4 +23,6 @@ public interface ContestService
     void addProblem2Contest(int problemId, int contestId);
 
     void deleteProblemFromContest(int problemId, int contestId);
+
+    void addContestTag(int contestId, String tag);
 }

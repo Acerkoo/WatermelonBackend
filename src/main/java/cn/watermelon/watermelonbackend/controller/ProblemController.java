@@ -47,6 +47,6 @@ public class ProblemController {
 
     @RequestMapping(value = "/problem/tag", method = RequestMethod.GET)
     public List<String> getProblemTag(int problemId) {
-        return problemService.getProblemTag(problemId);
+        return utilService.getProblemTag(problemId);
     }
 }

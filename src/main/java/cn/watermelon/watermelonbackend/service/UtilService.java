@@ -13,4 +13,6 @@ public interface UtilService {
     int getRecordByContest(int userId, int problemId, int contestId);
 
     List<String> getProblemTag(int problemId);
+
+    List<String> getContestTag(int contestId);
 }
