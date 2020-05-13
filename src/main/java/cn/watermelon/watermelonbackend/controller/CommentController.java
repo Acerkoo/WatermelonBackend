@@ -43,4 +43,19 @@ public class CommentController {
         return ConvertUtil.prs2Subs(commentService.getCommentByUserId(userId));
     }
 
+    @RequestMapping(value = "/admire", method = RequestMethod.POST)
+    void addCommentAdmire(int commentId, int userId) {
+        commentService.addCommentAdmire(commentId, userId);
+    }
+
+    @RequestMapping(value = "/admire", method = RequestMethod.DELETE)
+    void removeCommentAdmire(int commentId, int userId) {
+        commentService.removeCommentAdmire(commentId, userId);
+    }
+
+    @RequestMapping(value = "/admire", method = RequestMethod.GET)
+    void getUserAdmireHistory(int userId) {
+        commentService.getUserAdmireHistory(userId);
+    }
+
 }

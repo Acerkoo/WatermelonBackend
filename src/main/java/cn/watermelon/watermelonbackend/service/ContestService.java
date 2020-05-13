@@ -25,4 +25,7 @@ public interface ContestService {
     void deleteProblemFromContest(int problemId, int contestId);
 
     void addContestTag(int contestId, String tag);
+
+    List<Contest> getContestByTag(String tag);
+
 }

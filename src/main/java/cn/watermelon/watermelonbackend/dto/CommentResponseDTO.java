@@ -24,6 +24,8 @@ public class CommentResponseDTO {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
     Date createTime;
 
+    int admireNum;
+
     public CommentResponseDTO(Comment comment) {
         this.commentId = comment.getCommentId();
         this.userId = comment.getUserId();
@@ -32,5 +34,6 @@ public class CommentResponseDTO {
         this.content = comment.getContent();
         this.followId = comment.getCommentId();
         this.createTime = comment.getCreateTime();
+        this.admireNum = comment.getAdmireNum();
     }
 }

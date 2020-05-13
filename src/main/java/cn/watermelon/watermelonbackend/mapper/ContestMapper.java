@@ -60,4 +60,10 @@ public interface ContestMapper {
     })
     void updateContest(Contest contest);
 
+    @Select({"SELECT `contest_id`",
+            "FROM `contest_with_tag`",
+            "WHERE  `tag` = #{tag}",
+    })
+    List<Integer> getContestByTag(String tag);
+
 }

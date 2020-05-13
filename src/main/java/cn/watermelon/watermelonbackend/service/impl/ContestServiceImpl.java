@@ -84,4 +84,14 @@ public class ContestServiceImpl implements ContestService {
         }
     }
 
+    @Override
+    public List<Contest> getContestByTag(String tag) {
+        List<Integer> contestIds = contestMapper.getContestByTag(tag);
+        List<Contest> contests = new ArrayList<>();
+        for (Integer contestId: contestIds) {
+            contests.add(contestMapper.getContestByContestId(contestId));
+        }
+        return contests;
+    }
+
 }

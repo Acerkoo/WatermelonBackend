@@ -72,12 +72,17 @@ public class ContestController {
 
     @RequestMapping(value = "contest/tag", method = RequestMethod.POST)
     public void addContestTag(int contestId, String tag) {
-
+        contestService.addContestTag(contestId, tag);
     }
 
     @RequestMapping(value = "/contest/tag", method = RequestMethod.GET)
     public List<String> getContestTag(int contestId) {
+        return utilService.getContestTag(contestId);
+    }
 
+    @RequestMapping(value = "/contest/sort", method = RequestMethod.GET)
+    public List<Contest> getContestByTag(String tag) {
+        return contestService.getContestByTag(tag);
     }
 
 }

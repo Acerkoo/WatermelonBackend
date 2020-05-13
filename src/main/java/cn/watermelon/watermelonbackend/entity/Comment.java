@@ -23,4 +23,6 @@ public class Comment {
 
     String username;
 
+    int admireNum;
+
 }

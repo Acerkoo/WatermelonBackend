@@ -6,6 +6,7 @@ import cn.watermelon.watermelonbackend.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -41,6 +42,29 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public List<Comment> getCommentByUserId(int userId) {
         return commentMapper.getCommentListByUserId(userId);
+    }
+
+    @Override
+    public void addCommentAdmire(int commentId, int userId) {
+        commentMapper.addAdmireNum(commentId);
+        commentMapper.addAdmireHistory(userId, commentId, new Date());
+    }
+
+    @Override
+    public void removeCommentAdmire(int commentId, int userId) {
+        commentMapper.subAdmireNum(commentId);
+        commentMapper.removeAdmireHistory(userId, commentId);
+    }
+
+    @Override
+    public List<Comment> getUserAdmireHistory(int userId) {
+        List<Integer> list = commentMapper.getUserAdmireHistory(userId);
+        List<Comment> result = new ArrayList<>();
+        for (Integer commentId: list) {
+            Comment comment = commentMapper.getCommentByCommentId(commentId);
+            result.add(comment);
+        }
+        return result;
     }
 
 }

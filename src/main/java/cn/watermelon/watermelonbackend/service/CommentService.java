@@ -14,4 +14,10 @@ public interface CommentService {
 
     List<Comment> getCommentByUserId(int userId);
 
+    void addCommentAdmire(int commentId, int userId);
+
+    void removeCommentAdmire(int commentId, int userId);
+
+    List<Comment> getUserAdmireHistory(int userId);
+
 }

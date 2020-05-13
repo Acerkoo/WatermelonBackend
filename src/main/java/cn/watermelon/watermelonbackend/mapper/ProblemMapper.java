@@ -38,4 +38,30 @@ public interface ProblemMapper {
     })
     List<Problem> getAllProblems();
 
+    @Select({"SELECT *",
+            "FROM `problem`",
+            "WHERE `problem_id` = #{problemId}",
+    })
+    @Results(value = {
+            @Result(property = "keyId", column = "problem_id"),
+            @Result(property = "title", column = "title"),
+            @Result(property = "description", column = "description"),
+            @Result(property = "input", column = "input"),
+            @Result(property = "output", column = "output"),
+            @Result(property = "contestId", column = "contest_id"),
+            @Result(property = "isSpj", column = "spj"),
+            @Result(property = "visible", column = "visible"),
+            @Result(property = "tmLimit", column = "tm_limit"),
+            @Result(property = "memLimit", column = "mem_limit"),
+            @Result(property = "sampleInput", column = "sample_input"),
+            @Result(property = "sampleOutput", column = "sample_output"),
+            @Result(property = "contestId", column = "contest_id"),
+    })
+    Problem getProblemById(int problemId);
+
+    @Select({"SELECT `problem_id`",
+            "FROM `problem_with_tag`",
+            "WHERE `tag` = #{tag}",
+    })
+    List<Integer> getProblemByTag(String tag);
 }

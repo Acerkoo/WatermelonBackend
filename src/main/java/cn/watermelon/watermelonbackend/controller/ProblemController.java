@@ -49,4 +49,10 @@ public class ProblemController {
     public List<String> getProblemTag(int problemId) {
         return utilService.getProblemTag(problemId);
     }
+
+    @RequestMapping(value = "/problem/sort", method = RequestMethod.GET)
+    public List<ProblemDTO> getProblemByTag(int userId, String tag) {
+        return ConvertUtil.problemDTOList(problemService.getProblemByTag(tag), userId, utilService, null);
+    }
+
 }

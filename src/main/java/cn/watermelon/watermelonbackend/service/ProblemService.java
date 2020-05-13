@@ -16,4 +16,6 @@ public interface ProblemService {
 
     void addProblemTag(int problemId, String tag);
 
+    List<Problem> getProblemByTag(String tag);
+
 }

@@ -7,6 +7,7 @@ import cn.watermelon.watermelonbackend.service.ProblemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -43,6 +44,16 @@ public class ProblemServiceImpl implements ProblemService {
         } else {
             tagMapper.insertProblemTag(problemId, tag);
         }
+    }
+
+    @Override
+    public List<Problem> getProblemByTag(String tag) {
+        List<Integer> problemIds = problemMapper.getProblemByTag(tag);
+        List<Problem> problemList = new ArrayList<>();
+        for (Integer problemId: problemIds) {
+            problemList.add(problemMapper.getProblemById(problemId));
+        }
+        return problemList;
     }
 
     public int addProblem(Problem problem) {

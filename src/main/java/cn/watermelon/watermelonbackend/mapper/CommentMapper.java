@@ -3,15 +3,16 @@ package cn.watermelon.watermelonbackend.mapper;
 import cn.watermelon.watermelonbackend.entity.Comment;
 import org.apache.ibatis.annotations.*;
 
+import java.util.Date;
 import java.util.List;
 
 @Mapper
 public interface CommentMapper {
 
     @Insert({"INSERT into `comments`",
-            "(`user_id`, `username`, `title`, `content`, `follow_id`, `create_time`, `is_delete`)",
+            "(`user_id`, `username`, `title`, `content`, `follow_id`, `create_time`, `admire_num`, `is_delete`)",
             "VALUES",
-            "(#{userId}, #{username}, #{title}, #{content}, #{followId}, #{createTime}, false)"
+            "(#{userId}, #{username}, #{title}, #{content}, #{followId}, #{createTime}, 0, false)"
     })
     void insertComment(Comment comment);
 
@@ -43,6 +44,7 @@ public interface CommentMapper {
             @Result(property = "userId", column = "user_id"),
             @Result(property = "title", column = "title"),
             @Result(property = "content", column = "content"),
+            @Result(property = "admireNum", column = "admire_num"),
     })
     List<Comment> getCommentList();
 
@@ -54,6 +56,7 @@ public interface CommentMapper {
             @Result(property = "userId", column = "user_id"),
             @Result(property = "title", column = "title"),
             @Result(property = "content", column = "content"),
+            @Result(property = "admireNum", column = "admire_num"),
     })
     List<Comment> getCommentListByUserId(int userId);
 
@@ -68,5 +71,43 @@ public interface CommentMapper {
             "WHERE `comment_id` = #{commentId}",
     })
     Comment getCommentByCommentId(int commentId);
+
+    @Update({"UPDATE `comment`",
+            "SET `admire_num` = `admire_num` + 1",
+            "WHERE `comment_id` = #{commentId}",
+    })
+    void addAdmireNum(int commentId);
+
+    @Insert({"INSERT INTO `user_with_comment`",
+            "(`user_id`, `comment_id`, `opt_time`)",
+            "VALUES",
+            "(#{userId}, #{commentId}, #{optTime})",
+    })
+    void addAdmireHistory(int userId, int commentId, Date optTime);
+
+
+    @Update({"UPDATE `comment`",
+            "SET `admire_num` = `admire_num` - 1",
+            "WHERE `comment_id` = #{commentId}",
+    })
+    void subAdmireNum(int commentId);
+
+    @Delete({"DELETE FROM `user_with_comment`",
+            "WHERE `user_id` = #{userId} AND `comment_id` = #{commentId}",
+    })
+    void removeAdmireHistory(int userId, int commentId);
+
+    @Select({"SELECT `comment_id`",
+            "FROM `user_with_comment`",
+            "WHERE `user_id` = #{userId}",
+            "ORDER BY `opt_time` DESC",
+    })
+    @Results(value = {
+            @Result(property = "userId", column = "user_id"),
+            @Result(property = "title", column = "title"),
+            @Result(property = "content", column = "content"),
+            @Result(property = "admireNum", column = "admire_num"),
+    })
+    List<Integer> getUserAdmireHistory(int userId);
 
 }
