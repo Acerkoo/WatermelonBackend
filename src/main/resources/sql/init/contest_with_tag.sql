@@ -3,7 +3,7 @@ CREATE TABLE `contest_with_tag`
     `contest_id` INT,
     `tag` VARCHAR(255),
     `num` INT,
-    PRIMARY KEY("contest_id", "tag")
+    PRIMARY KEY(`contest_id`, `tag`)
 )
     COLLATE = utf8mb4_general_ci
     ENGINE = Innodb

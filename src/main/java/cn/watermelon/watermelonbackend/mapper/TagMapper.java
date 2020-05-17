@@ -13,9 +13,9 @@ import java.util.List;
 public interface TagMapper {
 
     @Insert({"INSERT INTO `problem_with_tag`",
-            "(`problem_id`, `tag`, 1)",
+            "(`problem_id`, `tag`, `num`)",
             "VALUES",
-            "{#{problemId}, #{tag})",
+            "(#{problemId}, #{tag}, 1)",
     })
     void insertProblemTag(int problemId, String tag);
 
@@ -31,16 +31,10 @@ public interface TagMapper {
     })
     int checkProblemTag(int problemId, String tag);
 
-    @Select({"SELECT `tag`",
-            "FROM `problem_with_tag`",
-            "WHERE `problem_id` = #{problemId}",
-    })
-    List<String> getProblemTag(int problemId);
-
     @Insert({"INSERT INTO `contest_with_tag`",
-            "(`contest_id`, `tag`, 1)",
+            "(`contest_id`, `tag`, `num`)",
             "VALUES",
-            "{#{contestId}, #{tag})",
+            "(#{contestId}, #{tag}, 1)",
     })
     void insertContestTag(int contestId, String tag);
 
@@ -55,11 +49,5 @@ public interface TagMapper {
             "WHERE `contest_id` = #{contestId} AND `tag` = #{tag}",
     })
     int checkContestTag(int contestId, String tag);
-
-    @Select({"SELECT `tag`",
-            "FROM `contest_with_tag`",
-            "WHERE `contest_id` = #{contestId}",
-    })
-    List<String> getContestTag(int contestId);
 
 }

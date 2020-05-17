@@ -54,8 +54,8 @@ public class CommentController {
     }
 
     @RequestMapping(value = "/admire", method = RequestMethod.GET)
-    void getUserAdmireHistory(int userId) {
-        commentService.getUserAdmireHistory(userId);
+    List<Comment> getUserAdmireHistory(int userId) {
+        return commentService.getUserAdmireHistory(userId);
     }
 
 }

@@ -46,8 +46,8 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public void addCommentAdmire(int commentId, int userId) {
-        commentMapper.addAdmireNum(commentId);
         commentMapper.addAdmireHistory(userId, commentId, new Date());
+        commentMapper.addAdmireNum(commentId);
     }
 
     @Override

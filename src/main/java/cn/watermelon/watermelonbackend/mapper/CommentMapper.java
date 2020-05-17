@@ -72,7 +72,7 @@ public interface CommentMapper {
     })
     Comment getCommentByCommentId(int commentId);
 
-    @Update({"UPDATE `comment`",
+    @Update({"UPDATE `comments`",
             "SET `admire_num` = `admire_num` + 1",
             "WHERE `comment_id` = #{commentId}",
     })
@@ -86,7 +86,7 @@ public interface CommentMapper {
     void addAdmireHistory(int userId, int commentId, Date optTime);
 
 
-    @Update({"UPDATE `comment`",
+    @Update({"UPDATE `comments`",
             "SET `admire_num` = `admire_num` - 1",
             "WHERE `comment_id` = #{commentId}",
     })
@@ -101,12 +101,6 @@ public interface CommentMapper {
             "FROM `user_with_comment`",
             "WHERE `user_id` = #{userId}",
             "ORDER BY `opt_time` DESC",
-    })
-    @Results(value = {
-            @Result(property = "userId", column = "user_id"),
-            @Result(property = "title", column = "title"),
-            @Result(property = "content", column = "content"),
-            @Result(property = "admireNum", column = "admire_num"),
     })
     List<Integer> getUserAdmireHistory(int userId);
 

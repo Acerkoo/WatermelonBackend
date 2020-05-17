@@ -35,6 +35,7 @@ public interface UtilMapper {
     @Select({"SELECT `tag`",
             "FROM `problem_with_tag`",
             "WHERE `problem_id` = #{problemId}",
+            "ORDER BY `num` DESC",
             "LIMIT 0, 5",
     })
     List<String> getProblemTag(int problemId);
@@ -42,6 +43,7 @@ public interface UtilMapper {
     @Select({"SELECT `tag`",
             "FROM `contest_with_tag`",
             "WHERE `contest_id` = #{problemId}",
+            "ORDER BY `num` DESC",
             "LIMIT 0, 5",
     })
     List<String> getContestTag(int contestId);
