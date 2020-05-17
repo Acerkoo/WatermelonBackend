@@ -15,4 +15,9 @@ public interface UtilService {
     List<String> getProblemTag(int problemId);
 
     List<String> getContestTag(int contestId);
+
+    int getAcNum(int problemId);
+
+    int getSubNum(int problemId);
+
 }

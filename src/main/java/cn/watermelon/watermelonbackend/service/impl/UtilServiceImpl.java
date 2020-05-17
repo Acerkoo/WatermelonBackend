@@ -43,4 +43,14 @@ public class UtilServiceImpl implements UtilService {
         return utilMapper.getContestTag(contestId);
     }
 
+    @Override
+    public int getAcNum(int problemId) {
+        return utilMapper.getProblemAcNum(problemId);
+    }
+
+    @Override
+    public int getSubNum(int problemId) {
+        return utilMapper.getProblemSubNum(problemId);
+    }
+
 }

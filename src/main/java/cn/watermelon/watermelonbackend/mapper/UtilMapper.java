@@ -45,4 +45,17 @@ public interface UtilMapper {
             "LIMIT 0, 5",
     })
     List<String> getContestTag(int contestId);
+
+    @Select({"SELECT COUNT(*)",
+            "FROM `submissions`",
+            "WHERE `problem_id` = #{problemId} AND `result` = 1",
+    })
+    int getProblemAcNum(int problemId);
+
+    @Select({"SELECT COUNT(*)",
+            "FROM `submissions`",
+            "WHERE `problem_id` = #{problemId}",
+    })
+    int getProblemSubNum(int problemId);
+
 }
