@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("")
 public class ProController {
 
-    @RequestMapping(value = "tag/problem", method = RequestMethod.GET)
+    @RequestMapping(value = "/tag/problem", method = RequestMethod.GET)
     List<String> getProblemTag() {
         List<String> result = new ArrayList<>();
         ProblemTag[] problemTags = ProblemTag.values();
@@ -24,7 +24,7 @@ public class ProController {
         return  result;
     }
 
-    @RequestMapping(value = "tag/contest", method = RequestMethod.GET)
+    @RequestMapping(value = "/tag/contest", method = RequestMethod.GET)
     List<String> getContestTag() {
         List<String> result = new ArrayList<>();
         ContestTag[] contestTags = ContestTag.values();

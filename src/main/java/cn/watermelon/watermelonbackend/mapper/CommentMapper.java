@@ -60,6 +60,18 @@ public interface CommentMapper {
     })
     List<Comment> getCommentListByUserId(int userId);
 
+    @Select({"SELECT * FROM `comments`",
+            "WHERE `is_delete` = false AND `comment_id` = #{commentId}",
+            "ORDER BY `create_time` DESC",
+    })
+    @Results(value = {
+            @Result(property = "userId", column = "user_id"),
+            @Result(property = "title", column = "title"),
+            @Result(property = "content", column = "content"),
+            @Result(property = "admireNum", column = "admire_num"),
+    })
+    List<Comment> getFollowComment(int commentId);
+
     @Update({"UPDATE `comments` SET",
             "`follow_id` = #{newFollowId}",
             "WHERE `follow_id` = #{lastFollowId}",
@@ -103,5 +115,6 @@ public interface CommentMapper {
             "ORDER BY `opt_time` DESC",
     })
     List<Integer> getUserAdmireHistory(int userId);
+
 
 }

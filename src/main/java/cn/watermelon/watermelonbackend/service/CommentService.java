@@ -20,4 +20,6 @@ public interface CommentService {
 
     List<Comment> getUserAdmireHistory(int userId);
 
+    List<Comment> getFollowComment(int commentId);
+
 }

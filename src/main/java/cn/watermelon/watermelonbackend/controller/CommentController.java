@@ -54,8 +54,13 @@ public class CommentController {
     }
 
     @RequestMapping(value = "/admire", method = RequestMethod.GET)
-    List<Comment> getUserAdmireHistory(int userId) {
-        return commentService.getUserAdmireHistory(userId);
+    List<CommentResponseDTO> getUserAdmireHistory(int userId) {
+        return ConvertUtil.prs2Subs(commentService.getUserAdmireHistory(userId));
+    }
+
+    @RequestMapping(value = "/follow", method = RequestMethod.GET)
+    List<CommentResponseDTO> getFollowComment(int commentId) {
+        return ConvertUtil.prs2Subs(commentService.getFollowComment(commentId));
     }
 
 }

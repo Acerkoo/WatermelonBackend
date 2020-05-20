@@ -67,4 +67,9 @@ public class CommentServiceImpl implements CommentService {
         return result;
     }
 
+    @Override
+    public List<Comment> getFollowComment(int commentId) {
+        return commentMapper.getFollowComment(commentId);
+    }
+
 }
