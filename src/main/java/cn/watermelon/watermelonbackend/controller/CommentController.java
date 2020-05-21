@@ -36,31 +36,31 @@ public class CommentController {
     }
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
-    List<CommentResponseDTO> getCommentsByUserId(Integer userId) {
+    List<CommentResponseDTO> getCommentsByUserId(Integer userId, Integer passerId) {
         if (userId == null) {
-            return ConvertUtil.prs2Subs(commentService.getComments());
+            return ConvertUtil.prs2Subs(commentService.getComments(), commentService, passerId);
         }
-        return ConvertUtil.prs2Subs(commentService.getCommentByUserId(userId));
+        return ConvertUtil.prs2Subs(commentService.getCommentByUserId(userId), commentService, passerId);
     }
 
     @RequestMapping(value = "/admire", method = RequestMethod.POST)
-    void addCommentAdmire(int commentId, int userId) {
-        commentService.addCommentAdmire(commentId, userId);
+    Boolean addCommentAdmire(int commentId, int userId) {
+        return commentService.addCommentAdmire(commentId, userId);
     }
 
     @RequestMapping(value = "/admire", method = RequestMethod.DELETE)
-    void removeCommentAdmire(int commentId, int userId) {
-        commentService.removeCommentAdmire(commentId, userId);
+    Boolean removeCommentAdmire(int commentId, int userId) {
+        return commentService.removeCommentAdmire(commentId, userId);
     }
 
     @RequestMapping(value = "/admire", method = RequestMethod.GET)
-    List<CommentResponseDTO> getUserAdmireHistory(int userId) {
-        return ConvertUtil.prs2Subs(commentService.getUserAdmireHistory(userId));
+    List<CommentResponseDTO> getUserAdmireHistory(int userId, Integer passerId) {
+        return ConvertUtil.prs2Subs(commentService.getUserAdmireHistory(userId), commentService, passerId);
     }
 
     @RequestMapping(value = "/follow", method = RequestMethod.GET)
-    List<CommentResponseDTO> getFollowComment(int commentId) {
-        return ConvertUtil.prs2Subs(commentService.getFollowComment(commentId));
+    List<CommentResponseDTO> getFollowComment(int commentId, Integer passerId) {
+        return ConvertUtil.prs2Subs(commentService.getFollowComment(commentId), commentService, passerId);
     }
 
 }

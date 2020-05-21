@@ -5,6 +5,7 @@ import cn.watermelon.watermelonbackend.dto.ProblemDTO;
 import cn.watermelon.watermelonbackend.entity.Comment;
 import cn.watermelon.watermelonbackend.entity.Problem;
 import cn.watermelon.watermelonbackend.enumeration.ProblemStatus;
+import cn.watermelon.watermelonbackend.service.CommentService;
 import cn.watermelon.watermelonbackend.service.UtilService;
 
 import java.util.ArrayList;
@@ -12,11 +13,17 @@ import java.util.List;
 
 public class ConvertUtil {
 
-    public static List<CommentResponseDTO> prs2Subs(List<Comment> list) {
+    public static List<CommentResponseDTO> prs2Subs(List<Comment> list, CommentService commentService, Integer passerId) {
         List<CommentResponseDTO> result = new ArrayList<>();
         if (list != null) {
             for (Comment comment : list) {
-                result.add(new CommentResponseDTO(comment));
+                CommentResponseDTO commentResponseDTO = new CommentResponseDTO(comment);
+                if (passerId != null) {
+                    commentResponseDTO.setAdmired(commentService.checkAdmire(comment.getCommentId(), passerId));
+                } else {
+                    commentResponseDTO.setAdmired(false);
+                }
+                result.add(commentResponseDTO);
             }
         }
         return result;

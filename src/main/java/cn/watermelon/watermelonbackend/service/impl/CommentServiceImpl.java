@@ -45,15 +45,25 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public void addCommentAdmire(int commentId, int userId) {
-        commentMapper.addAdmireHistory(userId, commentId, new Date());
-        commentMapper.addAdmireNum(commentId);
+    public boolean addCommentAdmire(int commentId, int userId) {
+        try {
+            commentMapper.addAdmireHistory(userId, commentId, new Date());
+            commentMapper.addAdmireNum(commentId);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void removeCommentAdmire(int commentId, int userId) {
-        commentMapper.subAdmireNum(commentId);
-        commentMapper.removeAdmireHistory(userId, commentId);
+    public boolean removeCommentAdmire(int commentId, int userId) {
+        try {
+            commentMapper.subAdmireNum(commentId);
+            commentMapper.removeAdmireHistory(userId, commentId);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -70,6 +80,15 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public List<Comment> getFollowComment(int commentId) {
         return commentMapper.getFollowComment(commentId);
+    }
+
+    @Override
+    public Boolean checkAdmire(int commentId, int passerId) {
+        if (commentMapper.checkAdmire(commentId, passerId) != 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

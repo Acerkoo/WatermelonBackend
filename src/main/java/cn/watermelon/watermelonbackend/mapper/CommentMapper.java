@@ -116,5 +116,10 @@ public interface CommentMapper {
     })
     List<Integer> getUserAdmireHistory(int userId);
 
+    @Select({"SELECT COUNT(*)",
+            "FROM `user_with_comment`",
+            "WHERE `comment_id` = #{commentId} AND `user_id` = #{passerId}",
+    })
+    int checkAdmire(int commentId, int passerId);
 
 }
