@@ -60,4 +60,10 @@ public interface UtilMapper {
     })
     int getProblemSubNum(int problemId);
 
+    @Select({"SELECT COUNT(*)",
+            "FROM `submissions`",
+            "WHERE `problem_id` = #{problemId} AND `result` = #{status}",
+    })
+    int getProblemStatus(int problemId, int status);
+
 }

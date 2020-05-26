@@ -43,6 +43,18 @@ public class ProblemDTO {
 
     int acNum;
 
+    int ceNum;
+
+    int waNum;
+
+    int tleNum;
+
+    int mleNum;
+
+    int peNum;
+
+    int reNum;
+
     int subNum;
 
     public ProblemDTO(Problem problem) {

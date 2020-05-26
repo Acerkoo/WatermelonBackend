@@ -53,4 +53,9 @@ public class UtilServiceImpl implements UtilService {
         return utilMapper.getProblemSubNum(problemId);
     }
 
+    @Override
+    public int getProblemStatus(int problemId, int status) {
+        return utilMapper.getProblemStatus(problemId, status);
+    }
+
 }

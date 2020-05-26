@@ -63,4 +63,9 @@ public class CommentController {
         return ConvertUtil.prs2Subs(commentService.getFollowComment(commentId), commentService, passerId);
     }
 
+    @RequestMapping(value = "/history", method = RequestMethod.GET)
+    List<CommentResponseDTO> getUserHistory(int userId, Integer passerId) {
+        return ConvertUtil.prs2Subs(commentService.getUserHistory(userId), commentService, passerId);
+    }
+
 }

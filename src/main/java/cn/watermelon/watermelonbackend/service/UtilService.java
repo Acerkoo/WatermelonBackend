@@ -20,4 +20,5 @@ public interface UtilService {
 
     int getSubNum(int problemId);
 
+    int getProblemStatus(int problemId, int status);
 }

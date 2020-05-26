@@ -23,4 +23,7 @@ public interface CommentService {
     List<Comment> getFollowComment(int commentId);
 
     Boolean checkAdmire(int commentId, int passId);
+
+    List<Comment> getUserHistory(int userId);
+
 }

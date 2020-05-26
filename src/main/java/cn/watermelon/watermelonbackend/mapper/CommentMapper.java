@@ -72,6 +72,18 @@ public interface CommentMapper {
     })
     List<Comment> getFollowComment(int commentId);
 
+    @Select({"SELECT * FROM `comments`",
+            "WHERE `is_delete` = false AND `follow_id` = #{followId}",
+            "ORDER BY `create_time` DESC",
+    })
+    @Results(value = {
+            @Result(property = "userId", column = "user_id"),
+            @Result(property = "title", column = "title"),
+            @Result(property = "content", column = "content"),
+            @Result(property = "admireNum", column = "admire_num"),
+    })
+    List<Comment> getCommentByFollowId(int followId);
+
     @Update({"UPDATE `comments` SET",
             "`follow_id` = #{newFollowId}",
             "WHERE `follow_id` = #{lastFollowId}",

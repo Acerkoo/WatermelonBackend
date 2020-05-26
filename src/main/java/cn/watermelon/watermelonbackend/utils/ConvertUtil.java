@@ -54,6 +54,12 @@ public class ConvertUtil {
                 problemDTO.setStatus(ProblemStatus.getProblemStatus(status));
                 problemDTO.setRankId(rankId);
                 problemDTO.setAcNum(utilService.getAcNum(problemId));
+                problemDTO.setCeNum(utilService.getProblemStatus(problemId, 2));
+                problemDTO.setPeNum(utilService.getProblemStatus(problemId, 3));
+                problemDTO.setReNum(utilService.getProblemStatus(problemId, 4));
+                problemDTO.setTleNum(utilService.getProblemStatus(problemId, 5));
+                problemDTO.setMleNum(utilService.getProblemStatus(problemId, 6));
+                problemDTO.setWaNum(utilService.getProblemStatus(problemId, 7));
                 problemDTO.setSubNum(utilService.getSubNum(problemId));
                 List<String> tags = utilService.getProblemTag(problemId);
                 problemDTO.setProblemTags(tags);

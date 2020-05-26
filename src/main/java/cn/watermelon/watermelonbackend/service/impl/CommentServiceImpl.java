@@ -91,4 +91,17 @@ public class CommentServiceImpl implements CommentService {
         }
     }
 
+    @Override
+    public List<Comment> getUserHistory(int userId) {
+        List<Comment> comments = commentMapper.getCommentListByUserId(userId);
+        List<Comment> result = new ArrayList<>();
+        for (Comment comment: comments) {
+            result.add(comment);
+            if (comment.getFollowId() != null) {
+                result.addAll(commentMapper.getCommentByFollowId(comment.getFollowId()));
+            }
+        }
+        return result;
+    }
+
 }
