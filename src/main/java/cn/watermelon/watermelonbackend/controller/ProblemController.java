@@ -6,10 +6,12 @@ import cn.watermelon.watermelonbackend.service.ProblemService;
 import cn.watermelon.watermelonbackend.service.UtilService;
 import cn.watermelon.watermelonbackend.utils.ConvertUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -21,13 +23,24 @@ public class ProblemController {
     @Autowired
     private UtilService utilService;
 
+    @Autowired
+    private RedisTemplate redisTemplate;
+
     @RequestMapping(value = "/problem/all", method = RequestMethod.GET)
     public List<ProblemDTO> getAll(int userId) {
         List<Problem> list = problemService.findAll();
         for (Problem problem: list) {
             System.out.println(problem);
         }
-        return ConvertUtil.problemDTOList(problemService.findAll(), userId, utilService, null);
+        synchronized (this) {
+            if(redisTemplate.opsForValue().get("problem") == null) {
+                redisTemplate.opsForValue().set("problem",problemService.findAll());
+            }
+        }
+        List<Problem> result = new ArrayList<>();
+//        result = problemService.findAll();
+        result = (List<Problem>) redisTemplate.opsForValue().get("problem");
+        return ConvertUtil.problemDTOList(result, userId, utilService, null);
     }
 
     @RequestMapping(value = "/problem/name", method = RequestMethod.GET)

@@ -23,8 +23,8 @@ public class SpiderController {
         Process process;
         List<Spider> list = new ArrayList<>();
         try {
-//            process = Runtime.getRuntime().exec("python3 /home/admin/source/main.py");
-            process = Runtime.getRuntime().exec("python C:\\Users\\74798\\Desktop\\main.py");
+            process = Runtime.getRuntime().exec("python3 /home/admin/source/main.py");
+//            process = Runtime.getRuntime().exec("python3 C:\\Users\\74798\\Desktop\\main.py");
             BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line = null;
             while ((line = in.readLine()) != null) {

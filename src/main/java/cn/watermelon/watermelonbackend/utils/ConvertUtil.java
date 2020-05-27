@@ -23,6 +23,7 @@ public class ConvertUtil {
                 } else {
                     commentResponseDTO.setAdmired(false);
                 }
+                commentResponseDTO.setFollowNum(commentService.getFollowComment(comment.getCommentId()).size());
                 result.add(commentResponseDTO);
             }
         }

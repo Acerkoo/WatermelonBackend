@@ -28,6 +28,8 @@ public class CommentResponseDTO {
 
     boolean admired;
 
+    int followNum;
+
     public CommentResponseDTO(Comment comment) {
         this.commentId = comment.getCommentId();
         this.userId = comment.getUserId();
