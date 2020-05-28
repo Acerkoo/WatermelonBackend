@@ -1,10 +1,12 @@
 package cn.watermelon.watermelonbackend.service.impl;
 
 import cn.watermelon.watermelonbackend.entity.Comment;
+import cn.watermelon.watermelonbackend.handler.BaseHandler;
 import cn.watermelon.watermelonbackend.mapper.CommentMapper;
 import cn.watermelon.watermelonbackend.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.socket.TextMessage;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,6 +23,7 @@ public class CommentServiceImpl implements CommentService {
         Date date = new Date();
         comment.setCreateTime(date);
         commentMapper.insertComment(comment);
+        BaseHandler.sendMessageToAllUsers(new TextMessage("comment"));
     }
 
     @Override
@@ -36,12 +39,26 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<Comment> getComments() {
-        return commentMapper.getCommentList();
+        List<Comment> list = commentMapper.getCommentList();
+        List<Comment> result = new ArrayList<>();
+        for (Comment comment: list) {
+            if (comment.getFollowId() == null) {
+                result.add(comment);
+            }
+        }
+        return result;
     }
 
     @Override
     public List<Comment> getCommentByUserId(int userId) {
-        return commentMapper.getCommentListByUserId(userId);
+        List<Comment> list = commentMapper.getCommentListByUserId(userId);
+        List<Comment> result = new ArrayList<>();
+        for (Comment comment: list) {
+            if (comment.getFollowId() == null) {
+                result.add(comment);
+            }
+        }
+        return result;
     }
 
     @Override

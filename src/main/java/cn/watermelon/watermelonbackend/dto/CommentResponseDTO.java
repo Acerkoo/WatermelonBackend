@@ -36,7 +36,7 @@ public class CommentResponseDTO {
         this.username = comment.getUsername();
         this.title = comment.getTitle();
         this.content = comment.getContent();
-        this.followId = comment.getCommentId();
+        this.followId = comment.getFollowId();
         this.createTime = comment.getCreateTime();
         this.admireNum = comment.getAdmireNum();
     }

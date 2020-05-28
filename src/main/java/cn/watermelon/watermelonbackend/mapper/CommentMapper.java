@@ -45,6 +45,7 @@ public interface CommentMapper {
             @Result(property = "title", column = "title"),
             @Result(property = "content", column = "content"),
             @Result(property = "admireNum", column = "admire_num"),
+            @Result(property = "followId", column = "follow_id"),
     })
     List<Comment> getCommentList();
 
@@ -57,11 +58,13 @@ public interface CommentMapper {
             @Result(property = "title", column = "title"),
             @Result(property = "content", column = "content"),
             @Result(property = "admireNum", column = "admire_num"),
+            @Result(property = "followId", column = "follow_id"),
+            @Result(property = "commentId", column = "comment_id"),
     })
     List<Comment> getCommentListByUserId(int userId);
 
     @Select({"SELECT * FROM `comments`",
-            "WHERE `is_delete` = false AND `comment_id` = #{commentId}",
+            "WHERE `is_delete` = false AND `follow_id` = #{commentId}",
             "ORDER BY `create_time` DESC",
     })
     @Results(value = {
@@ -69,6 +72,8 @@ public interface CommentMapper {
             @Result(property = "title", column = "title"),
             @Result(property = "content", column = "content"),
             @Result(property = "admireNum", column = "admire_num"),
+            @Result(property = "followId", column = "follow_id"),
+            @Result(property = "commentId", column = "comment_id"),
     })
     List<Comment> getFollowComment(int commentId);
 
@@ -81,6 +86,8 @@ public interface CommentMapper {
             @Result(property = "title", column = "title"),
             @Result(property = "content", column = "content"),
             @Result(property = "admireNum", column = "admire_num"),
+            @Result(property = "followId", column = "follow_id"),
+            @Result(property = "commentId", column = "comment_id"),
     })
     List<Comment> getCommentByFollowId(int followId);
 
