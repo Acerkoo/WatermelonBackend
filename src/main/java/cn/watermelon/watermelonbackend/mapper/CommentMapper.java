@@ -10,9 +10,9 @@ import java.util.List;
 public interface CommentMapper {
 
     @Insert({"INSERT into `comments`",
-            "(`user_id`, `username`, `title`, `content`, `follow_id`, `create_time`, `admire_num`, `is_delete`)",
+            "(`user_id`, `username`, `title`, `content`, `follow_id`, `create_time`, `admire_num`, `browse_num`,`is_delete`)",
             "VALUES",
-            "(#{userId}, #{username}, #{title}, #{content}, #{followId}, #{createTime}, 0, false)"
+            "(#{userId}, #{username}, #{title}, #{content}, #{followId}, #{createTime}, 0, 1, false)"
     })
     void insertComment(Comment comment);
 
@@ -36,6 +36,12 @@ public interface CommentMapper {
     })
     void deleteCommentByFollowId(int followId);
 
+    @Update({"UPDATE `comments`",
+            "SET `browse_num` = `browse_num` + 1",
+            "WHERE `comment_id` = #{commentId}",
+    })
+    void addCommentBrowseNum(int commentId);
+
     @Select({"SELECT * FROM `comments`",
             "WHERE `is_delete` = false",
             "ORDER BY `create_time` DESC",
@@ -46,6 +52,7 @@ public interface CommentMapper {
             @Result(property = "content", column = "content"),
             @Result(property = "admireNum", column = "admire_num"),
             @Result(property = "followId", column = "follow_id"),
+            @Result(property = "browseNum", column = "browse_num"),
     })
     List<Comment> getCommentList();
 
@@ -60,6 +67,7 @@ public interface CommentMapper {
             @Result(property = "admireNum", column = "admire_num"),
             @Result(property = "followId", column = "follow_id"),
             @Result(property = "commentId", column = "comment_id"),
+            @Result(property = "browseNum", column = "browse_num"),
     })
     List<Comment> getCommentListByUserId(int userId);
 
@@ -74,6 +82,7 @@ public interface CommentMapper {
             @Result(property = "admireNum", column = "admire_num"),
             @Result(property = "followId", column = "follow_id"),
             @Result(property = "commentId", column = "comment_id"),
+            @Result(property = "browseNum", column = "browse_num"),
     })
     List<Comment> getFollowComment(int commentId);
 
@@ -88,6 +97,7 @@ public interface CommentMapper {
             @Result(property = "admireNum", column = "admire_num"),
             @Result(property = "followId", column = "follow_id"),
             @Result(property = "commentId", column = "comment_id"),
+            @Result(property = "browseNum", column = "browse_num"),
     })
     List<Comment> getCommentByFollowId(int followId);
 

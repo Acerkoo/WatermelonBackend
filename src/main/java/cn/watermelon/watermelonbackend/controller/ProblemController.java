@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 public class ProblemController {
@@ -28,24 +29,27 @@ public class ProblemController {
 
     @RequestMapping(value = "/problem/all", method = RequestMethod.GET)
     public List<ProblemDTO> getAll(int userId) {
-        List<Problem> list = problemService.findAll();
-        for (Problem problem: list) {
-            System.out.println(problem);
-        }
         synchronized (this) {
-            if(redisTemplate.opsForValue().get("problem") == null) {
-                redisTemplate.opsForValue().set("problem",problemService.findAll());
+            if (redisTemplate.opsForValue().get("problem") == null) {
+                redisTemplate.opsForValue().set("problem", problemService.findAll(), 300, TimeUnit.SECONDS);
             }
         }
-        List<Problem> result = new ArrayList<>();
-//        result = problemService.findAll();
-        result = (List<Problem>) redisTemplate.opsForValue().get("problem");
+        List<Problem> result = (List<Problem>) redisTemplate.opsForValue().get("problem");
         return ConvertUtil.problemDTOList(result, userId, utilService, null);
     }
 
     @RequestMapping(value = "/problem/name", method = RequestMethod.GET)
     public List<ProblemDTO> getProblemByName(String name, int userId) {
-        return ConvertUtil.problemDTOList(problemService.findProblemByName(name), userId, utilService, null);
+        String param = "problem_" + name;
+        if (redisTemplate.opsForValue().get(param) == null) {
+            synchronized (this) {
+                if (redisTemplate.opsForValue().get(param) == null) {
+                    redisTemplate.opsForValue().set(param, problemService.findProblemByName(name), 120, TimeUnit.SECONDS);
+                }
+            }
+        }
+        List<Problem> result = (List<Problem>) redisTemplate.opsForValue().get(param);
+        return ConvertUtil.problemDTOList(result, userId, utilService, null);
     }
 
     @RequestMapping(value = "/problem/id", method = RequestMethod.GET)
@@ -60,7 +64,16 @@ public class ProblemController {
 
     @RequestMapping(value = "/problem/tag", method = RequestMethod.GET)
     public List<String> getProblemTag(int problemId) {
-        return utilService.getProblemTag(problemId);
+        String param = "problem_tag_" + problemId;
+        if (redisTemplate.opsForValue().get(param) == null) {
+            synchronized (this) {
+                if (redisTemplate.opsForValue().get(param) == null) {
+                    redisTemplate.opsForValue().set(param, utilService.getProblemTag(problemId), 120, TimeUnit.SECONDS);
+                }
+            }
+        }
+        List<String> result = (List<String>) redisTemplate.opsForValue().get(param);
+        return result;
     }
 
     @RequestMapping(value = "/problem/sort", method = RequestMethod.GET)

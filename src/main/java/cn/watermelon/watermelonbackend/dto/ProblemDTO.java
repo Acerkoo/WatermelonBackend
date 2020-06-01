@@ -4,10 +4,11 @@ import cn.watermelon.watermelonbackend.entity.Problem;
 import cn.watermelon.watermelonbackend.enumeration.ProblemStatus;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Data
-public class ProblemDTO {
+public class ProblemDTO implements Serializable {
 
     int problemId;
 

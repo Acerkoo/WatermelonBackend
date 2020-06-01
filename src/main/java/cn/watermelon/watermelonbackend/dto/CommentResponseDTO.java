@@ -30,6 +30,8 @@ public class CommentResponseDTO {
 
     int followNum;
 
+    int browseNum;
+
     public CommentResponseDTO(Comment comment) {
         this.commentId = comment.getCommentId();
         this.userId = comment.getUserId();
@@ -39,5 +41,6 @@ public class CommentResponseDTO {
         this.followId = comment.getFollowId();
         this.createTime = comment.getCreateTime();
         this.admireNum = comment.getAdmireNum();
+        this.browseNum = comment.getBrowseNum();
     }
 }

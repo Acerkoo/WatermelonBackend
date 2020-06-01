@@ -25,4 +25,6 @@ public class Comment {
 
     int admireNum;
 
+    int browseNum;
+
 }

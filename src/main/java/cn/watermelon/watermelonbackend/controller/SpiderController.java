@@ -1,9 +1,11 @@
 package cn.watermelon.watermelonbackend.controller;
 
 import cn.watermelon.watermelonbackend.entity.Spider;
+import cn.watermelon.watermelonbackend.job.SpiderJob;
 import cn.watermelon.watermelonbackend.utils.SpiderUtil;
 //import org.python.util.PythonInterpreter;
 import io.lettuce.core.dynamic.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,26 +20,13 @@ import java.util.List;
 @RequestMapping("/spider")
 public class SpiderController {
 
+    @Autowired
+    private SpiderJob spiderJob;
+
     @RequestMapping(value = "", method = RequestMethod.GET)
     public List<Spider> SpiderCalender() {
-        Process process;
-        List<Spider> list = new ArrayList<>();
-        try {
-            process = Runtime.getRuntime().exec("python3 /home/admin/source/main.py");
-//            process = Runtime.getRuntime().exec("python3 C:\\Users\\74798\\Desktop\\main.py");
-            BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String line = null;
-            while ((line = in.readLine()) != null) {
-                list.add(SpiderUtil.getInstance().getSpider(line));
-                System.out.println(line);
-            }
-            in.close();
-            process.waitFor();
-            return list;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return list;
+        List<Spider> result = spiderJob.getContestInfo();
+        return result;
     }
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
