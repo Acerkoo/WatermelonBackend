@@ -6,6 +6,7 @@ import cn.watermelon.watermelonbackend.entity.Comment;
 import cn.watermelon.watermelonbackend.entity.Problem;
 import cn.watermelon.watermelonbackend.enumeration.ProblemStatus;
 import cn.watermelon.watermelonbackend.service.CommentService;
+import cn.watermelon.watermelonbackend.service.ImageService;
 import cn.watermelon.watermelonbackend.service.UtilService;
 
 import java.util.ArrayList;
@@ -13,7 +14,8 @@ import java.util.List;
 
 public class ConvertUtil {
 
-    public static List<CommentResponseDTO> prs2Subs(List<Comment> list, CommentService commentService, Integer passerId) {
+    public static List<CommentResponseDTO> prs2Subs(List<Comment> list, CommentService commentService,
+                                                    Integer passerId, ImageService imageService) {
         List<CommentResponseDTO> result = new ArrayList<>();
         if (list != null) {
             for (Comment comment : list) {
@@ -24,6 +26,7 @@ public class ConvertUtil {
                     commentResponseDTO.setAdmired(false);
                 }
                 commentResponseDTO.setFollowNum(commentService.getFollowComment(comment.getCommentId()).size());
+                commentResponseDTO.setUserImageUrl(imageService.getImageUrl(comment.getUserId(), 0));
                 result.add(commentResponseDTO);
             }
         }

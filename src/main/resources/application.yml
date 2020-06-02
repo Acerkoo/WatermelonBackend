@@ -8,6 +8,10 @@ spring:
     url: jdbc:mysql://localhost:3306/watermelon?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai&useSSL=false&&allowPublicKeyRetrieval=true
     username: root
     password: root
+#  resources:
+#    static-locations: file:/Users/szki/Desktop/image/
+#  mvc:
+#    static-path-pattern: /image/**
 
 redis:
   host: localhost
