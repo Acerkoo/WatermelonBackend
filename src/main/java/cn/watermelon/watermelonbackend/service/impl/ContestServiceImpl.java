@@ -9,9 +9,7 @@ import cn.watermelon.watermelonbackend.service.ContestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class ContestServiceImpl implements ContestService {
@@ -27,7 +25,25 @@ public class ContestServiceImpl implements ContestService {
 
     @Override
     public List<Contest> getAllContest() {
-       return contestMapper.findAllContest();
+        List<Contest> tmpContests = contestMapper.getAllContest();
+        List<Contest> nowContest = new ArrayList<>();
+        List<Contest> result = new ArrayList<>();
+        Date date = new Date();
+        for (Contest contest: tmpContests) {
+            if (date.compareTo(contest.getEndTime()) > 0) {
+                result.add(contest);
+            } else {
+                nowContest.add(contest);
+            }
+        }
+        Collections.sort(nowContest);
+        Collections.reverse(result);
+//        result.addAll(nowContest);
+        nowContest.addAll(result);
+        for (Contest contest: nowContest) {
+            System.out.println(contest);
+        }
+        return nowContest;
     }
 
     public Contest findContestById(int id) {

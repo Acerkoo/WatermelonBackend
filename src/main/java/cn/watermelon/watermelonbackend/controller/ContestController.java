@@ -2,6 +2,7 @@ package cn.watermelon.watermelonbackend.controller;
 
 import cn.watermelon.watermelonbackend.dto.ProblemDTO;
 import cn.watermelon.watermelonbackend.entity.Contest;
+import cn.watermelon.watermelonbackend.enumeration.ContestTag;
 import cn.watermelon.watermelonbackend.service.ContestService;
 import cn.watermelon.watermelonbackend.service.UtilService;
 import cn.watermelon.watermelonbackend.utils.ConvertUtil;
@@ -24,7 +25,8 @@ public class ContestController {
 
     @RequestMapping(value = "/contest/all", method = RequestMethod.GET)
     public List<Contest> getAllContest() {
-        return contestService.getAllContest();
+        List<Contest> result = contestService.getAllContest();
+        return result;
     }
 
     @RequestMapping(value = "/contest/problem", method = RequestMethod.GET)
@@ -77,7 +79,12 @@ public class ContestController {
 
     @RequestMapping(value = "/contest/tag", method = RequestMethod.GET)
     public List<String> getContestTag(int contestId) {
-        return utilService.getContestTag(contestId);
+        List<String> result = utilService.getContestTag(contestId);
+        if (result == null) {
+            result.add(ContestTag.GeRen.getTag());
+            result.add(ContestTag.ACM.getTag());
+        }
+        return result;
     }
 
     @RequestMapping(value = "/contest/sort", method = RequestMethod.GET)

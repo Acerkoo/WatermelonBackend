@@ -8,8 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Component
 public class SpiderJob {
@@ -26,15 +25,40 @@ public class SpiderJob {
 
     public List<Spider> getContestInfo() {
         if (contests.size() == 0) {
-            contests = spiderWork();
+            scheduledWork();
         }
         return contests;
     }
 
     @Scheduled(fixedRate = 1000 * 60 * 60)
     private void scheduledWork() {
-        contests = spiderWork();
+        List<Spider> tmpContest = spiderWork();
+        contests = new ArrayList<>();
+        Collections.sort(contests, new Comparator<Spider>() {
+            @Override
+            public int compare(Spider o1, Spider o2) {
+                return o1.getEndTime().compareTo(o2.getEndTime());
+            }
+        });
+        List<Spider> pastContest = new ArrayList<>();
+        List<Spider> preContest = new ArrayList<>();
+        Date date = new Date();
+        for (Spider spider : tmpContest) {
+            if (spider.getEndTime().compareTo(date) < 0) {
+                pastContest.add(spider);
+            } else {
+                if (spider.getStartTime().compareTo(date) < 0) {
+                    contests.add(spider);
+                } else {
+                    preContest.add(spider);
+                }
+            }
+        }
+        preContest.addAll(pastContest);
+        contests.addAll(preContest);
+
         System.out.println("spider");
+
     }
 
     private List<Spider> spiderWork() {

@@ -35,6 +35,7 @@ public class CommentServiceImpl implements CommentService {
         } else {
             commentMapper.updateCommentFollow(commentId, comment.getFollowId());
         }
+        BaseHandler.sendMessageToAllUsers(new TextMessage("comment_delete"));
     }
 
     @Override
@@ -57,8 +58,6 @@ public class CommentServiceImpl implements CommentService {
         List<Comment> result = new ArrayList<>();
         for (Comment comment: list) {
             if (comment.getFollowId() == null) {
-                commentMapper.addCommentBrowseNum(comment.getCommentId());
-                comment.setBrowseNum(comment.getBrowseNum() + 1);
                 result.add(comment);
             }
         }
@@ -93,8 +92,6 @@ public class CommentServiceImpl implements CommentService {
         List<Comment> result = new ArrayList<>();
         for (Integer commentId: list) {
             Comment comment = commentMapper.getCommentByCommentId(commentId);
-            commentMapper.addCommentBrowseNum(comment.getCommentId());
-            comment.setBrowseNum(comment.getBrowseNum() + 1);
             result.add(comment);
         }
         return result;
@@ -125,8 +122,6 @@ public class CommentServiceImpl implements CommentService {
         List<Comment> result = new ArrayList<>();
         for (Comment comment: comments) {
             result.add(comment);
-            commentMapper.addCommentBrowseNum(comment.getCommentId());
-            comment.setBrowseNum(comment.getBrowseNum() + 1);
             if (comment.getFollowId() != null) {
                 result.addAll(commentMapper.getCommentByFollowId(comment.getFollowId()));
             }

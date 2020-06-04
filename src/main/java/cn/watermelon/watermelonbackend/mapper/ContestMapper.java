@@ -17,6 +17,20 @@ public interface ContestMapper {
 
     @Select({"SELECT * ",
             "FROM `contest`",
+            "WHERE `is_delete` = false",
+            "ORDER BY `end_time` DESC",
+    })
+    @Results(value = {
+            @Result(property = "title", column = "title"),
+            @Result(property = "description", column = "description"),
+            @Result(property = "startTime", column = "start_time"),
+            @Result(property = "endTime", column = "end_time"),
+
+    })
+    List<Contest> getAllContest();
+
+    @Select({"SELECT * ",
+            "FROM `contest`",
             "WHERE `is_delete` = false AND `contest_id` = #{contestId}",
     })
     @Results(value = {

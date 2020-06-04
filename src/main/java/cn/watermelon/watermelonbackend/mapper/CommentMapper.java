@@ -53,6 +53,7 @@ public interface CommentMapper {
             @Result(property = "admireNum", column = "admire_num"),
             @Result(property = "followId", column = "follow_id"),
             @Result(property = "browseNum", column = "browse_num"),
+            @Result(property = "createTime", column = "create_time"),
     })
     List<Comment> getCommentList();
 
@@ -68,6 +69,7 @@ public interface CommentMapper {
             @Result(property = "followId", column = "follow_id"),
             @Result(property = "commentId", column = "comment_id"),
             @Result(property = "browseNum", column = "browse_num"),
+            @Result(property = "createTime", column = "create_time"),
     })
     List<Comment> getCommentListByUserId(int userId);
 
@@ -83,6 +85,7 @@ public interface CommentMapper {
             @Result(property = "followId", column = "follow_id"),
             @Result(property = "commentId", column = "comment_id"),
             @Result(property = "browseNum", column = "browse_num"),
+            @Result(property = "createTime", column = "create_time"),
     })
     List<Comment> getFollowComment(int commentId);
 
@@ -98,6 +101,7 @@ public interface CommentMapper {
             @Result(property = "followId", column = "follow_id"),
             @Result(property = "commentId", column = "comment_id"),
             @Result(property = "browseNum", column = "browse_num"),
+            @Result(property = "createTime", column = "create_time"),
     })
     List<Comment> getCommentByFollowId(int followId);
 

@@ -31,6 +31,12 @@ public interface TagMapper {
     })
     int checkProblemTag(int problemId, String tag);
 
+    @Select({"SELECT `tag`",
+            "FROM `problem_with_tag`",
+            "WHERE `problem_id` = #{problemId}",
+    })
+    List<String> getProblemTag(int problemId);
+
     @Insert({"INSERT INTO `contest_with_tag`",
             "(`contest_id`, `tag`, `num`)",
             "VALUES",
@@ -49,5 +55,11 @@ public interface TagMapper {
             "WHERE `contest_id` = #{contestId} AND `tag` = #{tag}",
     })
     int checkContestTag(int contestId, String tag);
+
+    @Select({"SELECT `tag`",
+            "FROM `problem_with_tag`",
+            "WHERE `problem_id` = #{problemId}",
+    })
+    List<String> getContestTag(int contestId);
 
 }

@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class Contest {
+public class Contest implements Comparable<Contest> {
 
     private int contestId;
 
@@ -60,5 +60,10 @@ public class Contest {
 
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
+    }
+
+    @Override
+    public int compareTo(Contest o) {
+        return this.startTime.compareTo(o.getStartTime());
     }
 }
